@@ -30,20 +30,23 @@ export default Artists = (props)=>{
   )
   
   
-  const RenderData = (data)=>{
+  const RenderData = ()=>{
     if(error){
-      return <Text>Error</Text>
+      return <Text style={{color:'white'}}>Error</Text>
     }
 
     if(loading){
-      return <Text>Loading....</Text>
+      return <Text style={{color:'white'}}>Loading....</Text>
     }
 
     if(!searchInput){
         return <FlatList data={artistData.artistMany}          
                            renderItem={
                              ({item})=><ArtistListItem item={item} navigation={navigation}/>
-                            }>
+                            }
+                            keyExtractor={item => item._id}
+
+                            >
               </FlatList> 
       }else{
       
@@ -55,6 +58,8 @@ export default Artists = (props)=>{
                                renderItem={
                                    ({item})=><ArtistListItem item={item} navigation={navigation}/>
                                   }
+                                  keyExtractor={item => item._id}
+
                       >
                       </FlatList> 
             }
@@ -81,11 +86,23 @@ export default Artists = (props)=>{
           <SearchBar cancelText='Cancel' onChange={handleSearchInput} placeholder='Please Entry Artist Name'/>
           
           {
-            RenderData(searchData)
+            RenderData()
           }
     </Flex>
     </View>
    )
+
+}
+
+Artists.navigationOptions={
+  title: 'ARTISTS',
+  headerStyle: {
+    backgroundColor: 'white',
+  },
+  headerTintColor: 'black',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
 
 }
 

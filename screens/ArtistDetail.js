@@ -6,7 +6,6 @@ import { useQuery} from '@apollo/react-hooks';
 import {HeaderWapper,BioWapper,DetailWapper,Picture,ArtistTitle,Contact} from './style'
 import {IconWapper} from '../components/style'
 import {checkFaceBookIcon,checkImage,checkInsIcon,checkTwIcon} from '../utils/checkData'
-import { AntDesign } from '@expo/vector-icons';
 
 
 export default ArtistDetail = ({navigation})=>{
@@ -57,9 +56,9 @@ export default ArtistDetail = ({navigation})=>{
                </BioWapper>
 
               <IconWapper>
-                  {checkFaceBookIcon(data.artistById,'#3B5998')}
-                  {checkInsIcon(data.artistById,'#458eff')}
-                  {checkTwIcon(data.artistById,'#5BC0DE')}
+                  {checkFaceBookIcon(data.artistById,'#3B5998', wp('8%'))}
+                  {checkInsIcon(data.artistById,'#458eff', wp('8%'))}
+                  {checkTwIcon(data.artistById,'#5BC0DE' ,wp('8%'))}
               </IconWapper>
             
            </DetailWapper>
@@ -99,7 +98,7 @@ const style = StyleSheet.create({
 
    introduction: {
       fontWeight:'bold',
-      fontSize: wp('4%'),
+      fontSize: wp('4.2%'),
       marginBottom:'2%',
    },
 
@@ -112,3 +111,15 @@ const style = StyleSheet.create({
 
    
 })
+
+ArtistDetail.navigationOptions={
+   title: 'PROFILE',
+   headerStyle: {
+     backgroundColor: 'white',
+   },
+   headerTintColor: 'black',
+   headerTitleStyle: {
+     fontWeight: 'bold',
+   },
+ 
+ }

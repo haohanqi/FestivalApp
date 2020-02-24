@@ -28,7 +28,9 @@ return(
                 
                         <Flex.Item flex={1}>
                                 <IconWapper>       
-                                    {checkFaceBookIcon(item,'#3B5998')}{checkTwIcon(item,'#5BC0DE')}{checkInsIcon(item,'#458eff')}
+                                    {checkFaceBookIcon(item,'#3B5998', wp('5%'))}
+                                    {checkTwIcon(item,'#5BC0DE', wp('5%'))}
+                                    {checkInsIcon(item,'#458eff', wp('5%'))}
                                 </IconWapper> 
                         </Flex.Item>
 

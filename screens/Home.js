@@ -6,11 +6,11 @@ export default Home =(props)=>{
     const {navigation} =props
    
     function handleLinkPress(){
-       navigation.navigate('link')
+       navigation.navigate('Artists')
     }
 
     function handleSettingPress(){
-      navigation.navigate('setting')
+      navigation.navigate('Setting')
 
     }
 

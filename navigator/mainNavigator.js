@@ -7,7 +7,7 @@ import ArtistDetail from '../screens/ArtistDetail'
 
 const  homeStack =createStackNavigator(
     {
-        home: Home,
+        Home: Home,
         // setting:Setting,
         // link:Link
     }
@@ -15,14 +15,14 @@ const  homeStack =createStackNavigator(
 
 const settingStack = createStackNavigator(
 {
-    setting:Setting, 
-    artists:Artists,
+    Setting:Setting, 
+    Artists:Artists,
 }
 )
 
 const artistsStack = createStackNavigator(
     {
-        artists:Artists,
+        Artists:Artists,
         artistDetail:ArtistDetail,
     }
 
@@ -31,8 +31,23 @@ const artistsStack = createStackNavigator(
 
 export default tabNavigation = createBottomTabNavigator(
     {
-        home:homeStack,
-        artists:artistsStack,
-        setting:settingStack
-    }
+        Home:homeStack,
+        Artists:artistsStack,
+        Setting:settingStack
+    },
+   {
+      defaultNavigationOptions:{
+        tabBarOptions: {
+            activeTintColor: 'tomato',
+            inactiveTintColor: 'gray',
+            labelStyle: {
+                fontSize: 20,
+              },
+              style: {
+                backgroundColor: 'black',
+              },
+          },
+
+      }
+   }
 )

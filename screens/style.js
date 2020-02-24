@@ -38,7 +38,7 @@ export const ArtistTitle = styled.View`
 flex:1;
 justify-content:center;
 align-items:center;
-width:80%;
+width:90%;
 margin:3% auto;
 `
 

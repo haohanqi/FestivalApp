@@ -3,26 +3,26 @@ import { AntDesign } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 
-export const checkFaceBookIcon = (item,color)=>{
+export const checkFaceBookIcon = (item,color,size)=>{
     if(item.facebook){
-        return <AntDesign name="facebook-square" size={wp('5%')} color={color}/>
+        return <AntDesign name="facebook-square" size={size} color={color}/>
     }
     return <AntDesign name='frowno' size={wp('5%')} color={color}/>
 }
 
-export const checkInsIcon = (item,color)=>{
+export const checkInsIcon = (item,color,size)=>{
     console.log('icon')
     if(item.facebook){
-        return <AntDesign name="instagram" size={wp('5%')} color={color}/>
+        return <AntDesign name="instagram" size={size} color={color}/>
     }
-    return <AntDesign name='frowno' size={wp('5%')} color={color}/>
+    return <AntDesign name='frowno' size={size} color={color}/>
 }
 
-export const checkTwIcon = (item,color)=>{
+export const checkTwIcon = (item,color,size)=>{
     if(item.facebook){
-        return <AntDesign name="twitter" size={wp('5%')} color={color}/>
+        return <AntDesign name="twitter" size={size} color={color}/>
     }
-    return <AntDesign name='frowno' size={wp('5%')} color={color}/>
+    return <AntDesign name='frowno' size={size} color={color}/>
 }
 
 export const checkImage = (item,Componment)=>{
