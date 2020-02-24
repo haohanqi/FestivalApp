@@ -7,7 +7,7 @@ export const checkFaceBookIcon = (item,color,size)=>{
     if(item.facebook){
         return <AntDesign name="facebook-square" size={size} color={color}/>
     }
-    return <AntDesign name='frowno' size={wp('5%')} color={color}/>
+    return <AntDesign name='frowno' size={size} color={color}/>
 }
 
 export const checkInsIcon = (item,color,size)=>{
