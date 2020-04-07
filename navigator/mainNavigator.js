@@ -1,39 +1,63 @@
 import {createStackNavigator} from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
-import Home from '../screens/Home'
-import Setting from '../screens/Setting'
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import {createSwitchNavigator} from 'react-navigation'
+import Stage from '../screens/Stage'
+import Performance from '../screens/Performance'
 import Artists from '../screens/Artists'
 import ArtistDetail from '../screens/ArtistDetail'
+import Login from '../screens/Login'
+import Introduction from '../screens/homeTopTabs/Introduction'
+import Contact from '../screens/homeTopTabs/Contact'
 
-const  homeStack =createStackNavigator(
-    {
-        Home: Home,
-        // setting:Setting,
-        // link:Link
-    }
-)
 
-const settingStack = createStackNavigator(
+
+
+const homeTopTabs = createMaterialTopTabNavigator({
+    introduction:Introduction,
+    contact:Contact
+},{
+    tabBarOptions:'bottom',
+    tabBarOptions:{
+        activeTintColor:'pink',
+        inactiveTintColor:'black',
+        
+        style: {
+            backgroundColor: 'white',
+            marginTop:50,
+          },
+    },
+
+    swipeEnabled:true,
+
+})
+
+
+const stageStack = createStackNavigator(
 {
-    Setting:Setting, 
-    Artists:Artists,
+    stage:Stage, 
+    artistDetail:ArtistDetail,
+    performance:Performance,
+   
 }
 )
 
 const artistsStack = createStackNavigator(
     {
-        Artists:Artists,
+        artists:Artists,
+        stage:Stage, 
         artistDetail:ArtistDetail,
+        
     }
 
 )
 
 
-export default tabNavigation = createBottomTabNavigator(
+const bottomTabNavigation = createBottomTabNavigator(
     {
-        Home:homeStack,
+        Home: homeTopTabs,
         Artists:artistsStack,
-        Setting:settingStack
+        Stage:stageStack
     },
    {
       defaultNavigationOptions:{
@@ -51,3 +75,8 @@ export default tabNavigation = createBottomTabNavigator(
       }
    }
 )
+
+export default mainRoute= createSwitchNavigator({
+   // Login:Login,
+    main:bottomTabNavigation,
+})

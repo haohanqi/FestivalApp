@@ -5,10 +5,10 @@ import { AntDesign } from '@expo/vector-icons';
 import {Avatar,Title,Description,IconWapper} from './style'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import {checkFaceBookIcon,checkInsIcon,checkTwIcon,checkImage}from '../utils/checkData'
+
+
 export default  ArtistListItem = ({item, navigation}) => {    
-
 return(
-
     <View>
         <WingBlank size='lg'>
               

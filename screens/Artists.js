@@ -4,7 +4,6 @@ import {Flex,SearchBar} from '@ant-design/react-native';
 import {gql} from 'apollo-boost';
 import { useQuery} from '@apollo/react-hooks';
 import {useState,useEffect} from 'react'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import ArtistListItem from '../components/ArtistListItem'
 
 const ARTISTS = gql`{
@@ -19,7 +18,6 @@ const ARTISTS = gql`{
  }`
  
 export default Artists = (props)=>{
-
   const [artistData,setArtistdata] = useState({})
   const [searchInput, setSearchInput] = useState('')
   const [searchData,setSearchData]=useState([])

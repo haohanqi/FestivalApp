@@ -51,3 +51,12 @@ background-color:white;
 margin:3% auto;
 border-radius:${wp('5%')};
 `
+
+export const PerformanceWapper = styled.View`
+flex-direction:column;
+justify-content:center;
+align-content:center;
+background-color:#F86E6E;
+
+
+`
