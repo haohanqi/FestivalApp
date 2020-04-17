@@ -1,6 +1,6 @@
-import React,{useState}from 'react'
+import React from 'react'
 import {Text,ScrollView,StyleSheet} from 'react-native'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {gql} from 'apollo-boost';
 import { useQuery} from '@apollo/react-hooks';
 import {HeaderWapper,BioWapper,DetailWapper,Picture,ArtistTitle,Contact} from './style'
@@ -31,7 +31,7 @@ export default ArtistDetail = ({navigation})=>{
 
     const {data,loading,error}=useQuery(ArtistInfo,{variables:{_id:id}})
 
-    console.log(data)
+    //console.log(data)
     
     const renderData = ()=>{
        if(data){

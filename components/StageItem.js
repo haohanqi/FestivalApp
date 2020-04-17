@@ -1,11 +1,10 @@
-import React from 'react'
-import {FlatList,Text,StyleSheet,TouchableOpacity} from 'react-native'
+import React, {useState} from 'react'
+import {FlatList,Text,StyleSheet,TouchableOpacity,View} from 'react-native'
 import {StageItemWapper,StageTitle} from './style'
-import {WingBlank,WhiteSpace} from '@ant-design/react-native'
+import {WingBlank,WhiteSpace,ActivityIndicator} from '@ant-design/react-native'
 import PerformanceItem from './PeformanceItem'
 import {gql} from 'apollo-boost';
 import { useQuery} from '@apollo/react-hooks';
-import {useState,useEffect} from 'react'
 
 const PERFORMANCE = gql`
 query performanceMany($filter:FilterFindManyPerformanceInput){
@@ -31,19 +30,38 @@ export default StageItem =({navigation,name,stageId})=>{
       
           ) 
 
-   // useEffect(()=>{setPerformanceData(data)},[data])
     
+    const renderData =()=>{
+        if(error){
+            return <Text>Error</Text>
+        }
+
+        if(loading){
+            return <View style={{marginTop:100, marginLeft:'35%',marginRight:'35%',width:100,height:100,backgroundColor:'white'}}>
+                      <ActivityIndicator toast text='Loading' color='white'  size='large'/>
+                  </View>
+          }
+
+        if(data){
+
+          return <FlatList data={data.performanceMany} horizontal={true}  keyExtractor={item => item._id} renderItem={({item})=><PerformanceItem navigation={navigation} name={item.artist.name} artistId={item.artist._id} date={item.datetime} ></PerformanceItem>}/>
+
+        }
+
+    }    
 
     // console.log(performanceData?performanceData:"none")
     
-    const mdata = ["performance1","performance2","performance3"]
+   // const mdata = ["performance1","performance2","performance3"]
     
     return (
         <WingBlank>
         <WhiteSpace/>
         <StageItemWapper>
             <StageTitle>{name}</StageTitle>
-            <FlatList data={data?data.performanceMany:[]} horizontal={true}  keyExtractor={item => item._id} renderItem={({item})=><PerformanceItem navigation={navigation} name={item.artist.name} artistId={item.artist._id} date={item.datetime} ></PerformanceItem>}/>
+           {
+               renderData()
+           }
             <TouchableOpacity style={styles.detailsButton} onPress={()=>{navigation.navigate('performance')}}>
                 <Text style={styles.buttonText}>See More Details</Text>
             </TouchableOpacity>

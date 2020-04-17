@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Text,View,FlatList} from 'react-native'
-import {SearchBar} from '@ant-design/react-native'
+import {SearchBar,ActivityIndicator} from '@ant-design/react-native'
 import {PerformanceWapper} from './style'
 import PeformanceDateItem from '../components/PeformanceDateItem'
+import Nosuch from '../components/Nosuch'
 import {gql} from 'apollo-boost';
 import { useQuery} from '@apollo/react-hooks';
-import {useState,useEffect} from 'react'
 
 const PERFORMANCELIST = gql`{
 performanceMany{
@@ -24,7 +24,7 @@ performanceMany{
 
 export default Performance =()=>{
 
-    const mdata = ["per1","per2","per3"]
+    //const mdata = ["per1","per2","per3"]
     
     const [performanceData,setPerformanceData]=useState(null)
     const [searchInput, setSearchInput] = useState('')
@@ -38,40 +38,40 @@ export default Performance =()=>{
 
 
 
-    const renderData=()=>{
-      if(loading){
-        return <Text>loading</Text>
-    }
+    renderData=()=>{
+       if(loading){
+            return (<View style={{marginLeft:'40%',marginRight:'40%',width:100,height:100,backgroundColor:'white'}}>
+                       <ActivityIndicator toast text='Loading' color='white'  size='large'/>
+                   </View>)
+           }
 
-    if(error){
-        return <Text>some error happened</Text>
-    }
-
-    // if(data){
-    //   return <FlatList data={performanceData?performanceData.performanceMany:[]} renderItem={({item})=><PeformanceDateItem item={item}/>}/>
-    // }
-
-    if(!searchInput){
-      return <FlatList data={performanceData?performanceData.performanceMany:[]} keyExtractor={item => item._id} renderItem={({item})=><PeformanceDateItem item={item}/>}/>
-    }else{
-      if(searchInput && searchData.length<1){
-          return  <Text style={{color:'black'}}>No Such Artists</Text>
-
-      }else{
-        if(searchInput && searchData.length>0){
-          console.log(searchData)
-          return <FlatList data={searchData}  keyExtractor={item => item._id} renderItem={({item})=><PeformanceDateItem item={item}/>}/>
+        if(error){
+              return <Text>some error happened</Text>
+        }
+    
+         if(!searchInput){
+              return <FlatList data={performanceData?performanceData.performanceMany:[]} keyExtractor={item => item._id} renderItem={({item})=><PeformanceDateItem item={item}/>}/>
+         }else{
+               //console.log("search")
+                if(searchInput && searchData.length<1){
+                      //return <View > <Text style={{fontSize:20,fontWeight:'bold'}}>No Such Artists</Text></View>
+                       return <Nosuch/>
+                }else{
+                    if(searchInput && searchData.length>0){
+                      //console.log(searchData)
+                      return <FlatList data={searchData}  keyExtractor={item => item._id} renderItem={({item})=><PeformanceDateItem item={item}/>}/>
+                }
+          }
         }
       }
-    }
-    }
 
     const handleSearchInput =(input)=>{
+     // console.log(input)
       setSearchInput(input)
-  
       const result = performanceData.performanceMany.filter(
         ({artist})=>artist.name.includes(input)
       )
+      //console.log(result)
        setSearchData(result)
   
     }
@@ -79,13 +79,27 @@ export default Performance =()=>{
       //console.log(performanceData)
 
     return (
-
-        <PerformanceWapper>
-            <SearchBar cancelText='Cancel' onChange={handleSearchInput} placeholder='Please Entry Artist Name'/> 
+     <View>
+       <SearchBar cancelText='Cancel' onChange={handleSearchInput} placeholder='Please Entry Artist Name'/> 
+    
+        <PerformanceWapper>  
             {
-//              <FlatList data={performanceData?performanceData.performanceMany:[]} renderItem={({item})=><PeformanceDateItem item={item}/>}/>
                renderData()
             }
         </PerformanceWapper>
+
+      </View>
     )
+}
+
+Performance.navigationOptions={
+  title: 'PERFORMANCE',
+  headerStyle: {
+    backgroundColor: 'white',
+  },
+  headerTintColor: 'black',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+
 }

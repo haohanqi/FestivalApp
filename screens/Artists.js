@@ -1,10 +1,10 @@
-import React from 'react';
+import React , {useState} from 'react';
 import {View,Text,FlatList,} from 'react-native'
-import {Flex,SearchBar} from '@ant-design/react-native';
+import {Flex,SearchBar,ActivityIndicator} from '@ant-design/react-native';
 import {gql} from 'apollo-boost';
 import { useQuery} from '@apollo/react-hooks';
-import {useState,useEffect} from 'react'
 import ArtistListItem from '../components/ArtistListItem'
+import Nosuch from '../components/Nosuch'
 
 const ARTISTS = gql`{
   artistMany{
@@ -22,6 +22,8 @@ export default Artists = (props)=>{
   const [searchInput, setSearchInput] = useState('')
   const [searchData,setSearchData]=useState([])
   const {navigation} = props   
+  
+  
   const {data, loading ,error} = useQuery(ARTISTS,{
     onCompleted:({ARTISTS})=>{ setArtistdata(data)}
    }
@@ -34,7 +36,13 @@ export default Artists = (props)=>{
     }
 
     if(loading){
-      return <Text style={{color:'white'}}>Loading....</Text>
+      //return <Text style={{color:'white'}}>Loading....</Text>
+   
+        return <View style={{marginTop:200, marginLeft:'40%',marginRight:'40%',width:100,height:100,backgroundColor:'white'}}>
+                  <ActivityIndicator toast text='Loading' color='white'  size='large'/>
+                </View>
+     
+     
     }
 
     if(!searchInput){
@@ -49,7 +57,8 @@ export default Artists = (props)=>{
       }else{
       
           if(searchInput && searchData.length<1){
-             return  <Text style={{color:'white'}}>No Such Artists</Text>
+             //return  <Text style={{color:'white'}}>No Such Artists</Text>
+             return <Nosuch style={{marginTop:300}}/>
           }else{
             if(searchInput && searchData.length>0){
               return <FlatList data={searchData}          
@@ -81,8 +90,7 @@ export default Artists = (props)=>{
     <View style={{backgroundColor:'black', height:'100%' }}>
     <Flex direction='column' justify='center' align='stretch'>
           
-          <SearchBar cancelText='Cancel' onChange={handleSearchInput} placeholder='Please Entry Artist Name'/>
-          
+          <SearchBar cancelText='Cancel' onChange={handleSearchInput} placeholder='Please Entry Artist Name'/> 
           {
             RenderData()
           }

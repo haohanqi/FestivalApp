@@ -57,6 +57,6 @@ flex-direction:column;
 justify-content:center;
 align-content:center;
 background-color:#F86E6E;
-
+height:700;
 
 `

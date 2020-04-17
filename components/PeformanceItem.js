@@ -1,6 +1,6 @@
 import React from 'react'
 import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
-import {PerformanceItemWapper,Avatar} from './style'
+import {PerformanceItemWapper} from './style'
 
 export default PerformanceItem = ({navigation,imageSrc,name,date,artistId})=>{
     const dateFormat = new Date (date).toLocaleString()

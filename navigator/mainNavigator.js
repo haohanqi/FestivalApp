@@ -77,6 +77,6 @@ const bottomTabNavigation = createBottomTabNavigator(
 )
 
 export default mainRoute= createSwitchNavigator({
-   // Login:Login,
+    Login:Login,
     main:bottomTabNavigation,
 })

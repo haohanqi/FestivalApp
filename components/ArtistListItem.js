@@ -1,9 +1,9 @@
 import React from 'react'
-import {View,Text,Image,StyleSheet} from 'react-native'
-import { Button, Flex, WhiteSpace, WingBlank } from '@ant-design/react-native';
+import {View} from 'react-native'
+import {  Flex, WhiteSpace, WingBlank } from '@ant-design/react-native';
 import { AntDesign } from '@expo/vector-icons';
-import {Avatar,Title,Description,IconWapper} from './style'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import {Avatar,Title,IconWapper} from './style'
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {checkFaceBookIcon,checkInsIcon,checkTwIcon,checkImage}from '../utils/checkData'
 
 

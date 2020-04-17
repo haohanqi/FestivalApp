@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {View, Button, Text,ScrollView} from 'react-native'
+import React, {useState} from 'react';
+import {View,FlatList} from 'react-native'
+import {ActivityIndicator} from '@ant-design/react-native';
 import StageItem from '../components/StageItem'
 import {gql} from 'apollo-boost';
 import { useQuery} from '@apollo/react-hooks';
-import {useState,useEffect} from 'react'
-import { FlatList } from 'react-native-gesture-handler';
+
 
 const STAGES = gql`{
   stageMany{
@@ -25,27 +25,47 @@ export default Stage = (props)=>{
      }
   )
 
-    console.log(stage?stage.stageMany:"none")
+    //console.log(stage?stage.stageMany:"none")
     
-    
-    
+const renderData = ()=>{
 
-    function handleHomePress(){
-      navigation.navigate('performance')
-  }
+    if(error){
 
-  function handleLinkPress(){
-    navigation.navigate('artists')
-  }
+    }
 
+    if(loading){
+      return <View style={{marginTop:200, marginLeft:'40%',marginRight:'40%',width:100,height:100,backgroundColor:'white'}}>
+                <ActivityIndicator toast text='Loading' color='white'  size='large'/>
+            </View>
+    }
+
+    if(data){
+      return <FlatList data={stage?stage.stageMany:[]}   keyExtractor={item => item._id} renderItem={({item})=><StageItem navigation={navigation} name={item.name} stageId={item._id}/>}/>
+    }
+
+}
 
 return (
   <View>
 
-    <FlatList data={stage?stage.stageMany:[]}   keyExtractor={item => item._id} renderItem={({item})=><StageItem navigation={navigation} name={item.name} stageId={item._id}/>}/>
+    {
+      renderData()
+    }
       
   </View>
 )
+
+}
+
+Stage.navigationOptions={
+  title: 'STAGES',
+  headerStyle: {
+    backgroundColor: 'white',
+  },
+  headerTintColor: 'black',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
 
 }
 // {

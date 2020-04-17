@@ -2,10 +2,8 @@ import React from 'react'
 import {Text,View,StyleSheet} from 'react-native'
 import {WingBlank,WhiteSpace} from '@ant-design/react-native'
 import {PerformanceDateItemWapper,Avatar} from './style'
-import { FlatList } from 'react-native-gesture-handler';
 import {gql} from 'apollo-boost';
 import { useQuery} from '@apollo/react-hooks';
-import {useState,useEffect} from 'react'
 
 const PERFORMANCE = gql`
 query performanceMany($filter:FilterFindManyPerformanceInput){
@@ -19,7 +17,7 @@ query performanceMany($filter:FilterFindManyPerformanceInput){
 
 export default PerformanceDateItem =({item})=>{
     const {artist,stage} = item
-    const mdata=["stage1","stage2","stage3"]
+   // const mdata=["stage1","stage2","stage3"]
 
     const {data, loading ,error,refetch} = useQuery(PERFORMANCE,
         {variables:{filter:{artistId:artist._id}}}) 
@@ -28,7 +26,7 @@ export default PerformanceDateItem =({item})=>{
 
     const renderData=()=>{
         if(loading){
-            return <Text>loading</Text>
+            return  
         }
 
         if(error){
